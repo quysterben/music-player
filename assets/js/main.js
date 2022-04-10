@@ -74,8 +74,10 @@ const app = {
         localStorage.setItem(PLAYER_STORAGE, JSON.stringify(this.config));
     },
     loadConfig: function() {
-        this.isRandom = this.config.isRandom;
-        this.isRepeat = this.config.isRepeat;
+        if (!this.config === {}) {
+            this.isRandom = this.config.isRandom;
+            this.isRepeat = this.config.isRepeat;
+        }
         repeatBtn.classList.toggle('active', this.isRepeat);
         randomBtn.classList.toggle('active', this.isRandom);
     },
@@ -204,7 +206,6 @@ const app = {
 
         // handle song click
         playlist.onclick = function(e) {
-
             if (e.target.closest('.song:not(.active)') 
                 && !e.target.closest('.option')) {
                     if (e.target.closest('.option')) {
